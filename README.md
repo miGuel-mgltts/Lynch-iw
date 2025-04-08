@@ -1,6 +1,4 @@
-- 👋 Hola, soy @Lynch-iw, o me puedes llamar miguel.
+- 👋 Hola, soy miguel.
 - 👀 Estoy interesado en aprender sobre el desarrollo web.
 - 📫 puedes contactarme en:
 - instragram @miguel_iw
-- telegram   @lynch_iw
-- facebook   @miguel iw
