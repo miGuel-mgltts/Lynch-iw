@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="productos.css">
+	<link rel="icon" href="aa.png">
+
+    <!-- ICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <script>
+        // Escuchar mensajes enviados desde la página principal
+        window.addEventListener('message', function(event) {
+            // Verificar si el mensaje indica que se debe activar el modo oscuro
+            if (event.data.darkMode !== undefined) {
+                // Aplicar o quitar la clase 'dark' según el estado recibido
+                if (event.data.darkMode === true) {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.remove('dark');
+                }
+            }
+        });
+    
+        // Enviar un mensaje a la página principal solicitando recargar los estilos cuando la página se carga completamente
+        window.addEventListener('load', function() {
+            // Enviar un mensaje al padre para indicar que la página se ha cargado completamente
+            window.parent.postMessage({ reloadStyles: true }, '*');
+        });
+    </script>
+</head>
+
+
+<body>
+
+    <!--CONTENEDOR-->
+    <div class="conteiner">
+
+        <div class="conteiner-top">
+
+            <h1>REGISTRAR PRODUCTOS</h1>
+    
+            <form id="formProducto" class="form-horizontal" action="controladorProducto.php" method="POST">
+            
+                    <div class="grid-form">
+                        <!-- FILA DE ETIQUETAS -->
+                        <label for="codigo">Código</label>
+                        <label for="nombre">Nombre</label>
+                        <label for="descripcion">Descripción</label>
+                        <label for="categoria">Categoría</label>
+            
+                        <!-- FILA DE CAMPOS -->
+                        <input type="text" id="codigo" name="codigo" required>
+                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="descripcion" name="descripcion" required>
+                        <select id="categoria" name="categoria">
+                            <option value="electrónica">Electrónica</option>
+                            <option value="ropa">Ropa</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="muebles">Muebles</option>
+                        </select>
+                    </div>
+            
+                    <div class="grid-form">
+                        <label for="precio_venta">Precio Venta</label>
+                        <label for="precio_compra">Precio Compra</label>
+                        <label for="stock_inicial">Stock Inicial</label>
+                        <label for="stock_minimo">Stock Mínimo</label>
+                        
+            
+                        <input type="number" id="precio_venta" name="precio_venta" step="0.01" required>
+                        <input type="number" id="precio_compra" name="precio_compra" step="0.01" required>
+                        <input type="number" id="stock_inicial" name="stock_inicial" required>
+                        <input type="number" id="stock_minimo" name="stock_minimo" required>
+                        
+                    </div>
+            
+                    <div class="submit-row">
+                        <button class="btn">Registrar</button>
+                    </div>
+            </form>
+            
+
+        </div>
+
+        <div class="conteiner-bottom">
+
+            <!-- FORMULARIO DE FILTROS -->
+
+            <form action="controladorProducto.php" method="GET" class="form-horizontal form-horizontal-consul">
+
+                <div class="grid-form grid-form-consul">
+                    <!-- FILA DE ETIQUETAS -->
+                     <label for="filtro_codigo">Filtrar por Codigo:</label>
+                     <label for="filtro_categoria">Filtrar por Categoría:</label>
+                     <label for="filtro_stock">Filtrar por Stock:</label>
+        
+                    <!-- FILA DE CAMPOS -->
+                    <input type="text" id="filtro_nombre" name="filtro_nombre">
+                    <select id="filtro_categoria" name="filtro_categoria">
+                        <option value="">Todas</option>
+                        <option value="electrónica">Electrónica</option>
+                        <option value="ropa">Ropa</option>
+                        <option value="alimentos">Alimentos</option>
+                        <option value="muebles">Muebles</option>
+                    </select>                
+                    <select id="filtro_stock" name="filtro_stock">
+                        <option value="">Todos</option>
+                        <option value="bajo">Stock Bajo</option>
+                        <option value="suficiente">Stock Suficiente</option>
+                    </select>
+                </div>
+
+                <div class="submit-row">
+                    <button class="btn btn-consul">Filtrar</button>
+                </div>
+ 
+            </form>
+        
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Código</th>
+                        <th>Categoría</th>
+                        <th>Precio de Venta</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se mostrarían los productos filtrados de la base de datos -->
+                    <tr>
+                        <td>Producto 1</td>
+                        <td>001</td>
+                        <td>Electrónica</td>
+                        <td>$100.00</td>
+                        <td>20</td>
+                        <td>
+                            <button class="btn btn-editar">Editar</button>
+                            <button class="btn btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar este producto?');">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Producto 2</td>
+                        <td>002</td>
+                        <td>Electrónica</td>
+                        <td>$100.00</td>
+                        <td>20</td>
+                        <td>
+                            <button class="btn btn-editar">Editar</button>
+                            <button class="btn btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar este producto?');">Eliminar</button>
+                        </td>
+                    </tr>
+                    <!-- Añadir más productos aquí -->
+                </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+
+<!-- SCRIPT -->
+</body>
+</html>
