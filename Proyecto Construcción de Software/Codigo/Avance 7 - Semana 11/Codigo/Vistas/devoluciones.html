@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Módulo Devolución</title>
+  <link rel="stylesheet" href="../assets/css/devoluciones.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="conteiner">
+
+  <div class="conteiner-top">
+    <h1>REGISTRAR DEVOLUCIÓN</h1>
+
+    <div id="formDevolucion" class="form-horizontal">
+
+      <div class="grid-form">
+        <!-- Etiquetas -->
+        <label for="cliente">Cliente</label>
+        <label for="producto">Producto</label>
+        <label for="cantidad">Cantidad</label>
+
+        <!-- Campos -->
+        <input type="text" id="cliente" name="cliente" required>
+        <select id="producto" name="producto" required>
+          <option value="">Seleccione un producto</option>
+          <option value="Producto 1">Producto 1</option>
+          <option value="Producto 2">Producto 2</option>
+          <option value="Producto 3">Producto 3</option>
+        </select>
+        <input type="number" id="cantidad" name="cantidad" min="1" required>
+      </div>
+
+      <div class="grid-form">
+        <label for="fecha">Fecha de Devolución</label>
+        <label for="motivo">Motivo de Devolución</label>
+        <div></div>
+        <input type="date" id="fecha" name="fecha" required>
+        <textarea id="motivo" name="motivo" rows="4" required></textarea>
+        <div></div>
+      </div>
+
+      <div class="submit-row">
+        <button class="btn" onclick="registrarDevolucion()">Registrar Devolución</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="conteiner-bottom">
+    
+    <h1>LISTA DE DEVOLUCIONES</h1>
+
+    <table class="tabla" id="tablaDevoluciones">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Motivo</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cliente Ejemplo</td>
+          <td>Producto 1</td>
+          <td>1</td>
+          <td>Producto defectuoso</td>
+          <td>2025-04-25</td>
+          <td>
+            <button class="btn btn-editar">Editar</button>
+            <button class="btn btn-eliminar">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<script src="../assets/JS/devoluciones.js"></script> <!-- Si tienes JS para manejar acciones -->
+<script>
+  // Escuchar mensajes del iframe para modo oscuro
+  window.addEventListener('message', function(event) {
+    if (event.data.darkMode !== undefined) {
+      if (event.data.darkMode) {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  });
+
+  // Pedir el estado actual cuando cargue
+  window.parent.postMessage({ reloadStyles: true }, '*');
+</script>
+
+</body>
+</html>
