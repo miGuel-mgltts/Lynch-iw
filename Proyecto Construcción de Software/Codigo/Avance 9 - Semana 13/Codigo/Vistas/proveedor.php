@@ -1,0 +1,110 @@
+<?php
+
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Módulo Proveedores</title>
+  <link rel="stylesheet" href="../assets/css/provedores.css"> <!-- Usamos mismo CSS para unificar -->
+</head>
+<body>
+
+<div class="conteiner">
+
+  <div class="conteiner-top">
+
+      <h1>REGISTRAR PROVEEDOR</h1>
+
+      <form method="post" action="procesar_agregar.php" class="form-horizontal">
+
+        <div class="grid-form">
+          <label for="cedula">Cédula</label>
+          <label for="nombre">Nombre</label>
+          <label for="ruc">RUC</label>
+          <label for="telefono">Teléfono</label>
+
+          <input type="text" id="cedula" name="cedula" required>
+          <input type="text" id="nombre" name="nombre" required>
+          <input type="text" id="ruc" name="ruc" required>
+          <input type="text" id="telefono" name="telefono">
+        </div>
+
+        <div class="grid-form">
+          <label for="direccion">Dirección</label>
+          <label for="correo">Correo</label>
+          <label for="producto">Producto Asociado</label>
+          <label></label> <!-- Espacio vacío para simetría -->
+
+          <input type="text" id="direccion" name="direccion">
+          <input type="email" id="correo" name="correo">
+          <select id="producto" name="producto" required>
+            <option value="">Seleccione un producto</option>
+            <option value="Producto 1">Producto 1</option>
+            <option value="Producto 2">Producto 2</option>
+            <option value="Producto 3">Producto 3</option>
+          </select>
+          <div></div> <!-- Para mantener la rejilla alineada -->
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn">Registrar</button>
+        </div>
+      </form>
+
+  </div>
+
+  <!-- TABLA DE PROVEEDORES -->
+  <div class="conteiner-bottom">
+
+      <h1>LISTA DE PROVEEDORES</h1>
+
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>RUC</th>
+              <th>Teléfono</th>
+              <th>Dirección</th>
+              <th>Correo</th>
+              <th>Producto Asociado</th> 
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Proveedor Ejemplo 2</td>
+              <td>1122334455001</td>
+              <td>0987456321</td>
+              <td>Calle Verdad 456</td>
+              <td>ejemplo2@correo.com</td>
+              <td>Producto 2</td>
+              <td>
+                <button class="btn btn-editar">Editar</button>
+                <button class="btn btn-eliminar">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script>
+  // Escuchar mensajes del iframe
+  window.addEventListener('message', function(event) {
+      if (event.data.darkMode !== undefined) {
+          if (event.data.darkMode) {
+              document.body.classList.add('dark');
+          } else {
+              document.body.classList.remove('dark');
+          }
+      }
+  });
+
+  window.parent.postMessage({ reloadStyles: true }, '*');
+</script>
+
+</body>
+</html>
